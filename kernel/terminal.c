@@ -16,7 +16,7 @@ void terminal_init(struct terminal *term, uint32_t *framebuffer, uint32_t width,
         term->height_char = height / LIB_FONT_HEIGHT_pixel;
         term->cursor_x = 0;
         term->cursor_y = 0;
-        term->color_foreground = STD_COLOR_GREEN_light;
+        term->color_foreground = STD_COLOR_WHITE;
         term->color_background = 0x00101010; // dark
 
         // clear the screen

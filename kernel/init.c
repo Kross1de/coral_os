@@ -39,7 +39,7 @@ void _entry( void ) {
 	terminal_init(&term, framebuffer, width, height, pitch);
 
 	// show welcome message
-	const char welcome[] = "CoralOS starting...again\n";
+	const char welcome[] = "Hello, World\n";
 	terminal_print(&term, welcome, sizeof(welcome) - 1);
 
 	// infinite loop

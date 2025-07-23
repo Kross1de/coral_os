@@ -22,5 +22,5 @@ Copyright (C) Kross1de. All rights reserved.
 	#define	STD_VIDEO_DEPTH_shift				2
 	#define	STD_VIDEO_DEPTH_byte				4
 	#define	STD_VIDEO_DEPTH_bit				32
-	#define	STD_COLOR_GREEN_light				0xFF00FF00
+	#define	STD_COLOR_WHITE					0xFFFFFFFF
 #endif
