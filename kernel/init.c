@@ -9,6 +9,7 @@ Copyright (C) Kross1de. All rights reserved.
 	#include	"../library/color.c"
 	#include	"../library/font.h"
 	#include	"../library/font.c"
+	#include	"terminal.h"
 	//----------------------------------------------------------------------
 
 // limine definitions
@@ -28,20 +29,18 @@ void _entry( void ) {
 		for(;;);
 
 	// set pointer to first pixel of video memory area
-	uint32_t *pixel = (uint32_t *) limine_framebuffer_request.response -> framebuffers[ 0 ] -> address;
+	uint32_t *framebuffer = (uint32_t *) limine_framebuffer_request.response -> framebuffers[ 0 ] -> address;
+	uint32_t width = limine_framebuffer_request.response -> framebuffers[ 0 ] -> width;
+	uint32_t height = limine_framebuffer_request.response -> framebuffers[ 0 ] -> height;
+	uint32_t pitch = limine_framebuffer_request.response -> framebuffers[ 0 ] -> pitch;
 
-	// change all pixels color to DARK
-	for( uint64_t y = 0; y < limine_framebuffer_request.response -> framebuffers[ 0 ] -> height; y++ ) {
-		for( uint64_t x = 0; x < limine_framebuffer_request.response -> framebuffers[ 0 ] -> width; x++ )
-			pixel[ x ] = 0x00101010;
-
-		// next line of pixels on framebuffer
-		pixel = (uint32_t *) ((uint64_t) pixel + limine_framebuffer_request.response -> framebuffers[ 0 ] -> pitch);
-	}
+	// initialize terminal
+	struct terminal term;
+	terminal_init(&term, framebuffer, width, height, pitch);
 
 	// show welcome message
-	const char welcome[ 19 ] = "CoralOS starting...";
-	lib_font( LIB_FONT_FAMILY_ROBOTO_MONO, welcome, sizeof( welcome ), STD_COLOR_GREEN_light, (uint32_t *) limine_framebuffer_request.response -> framebuffers[ 0 ] -> address, limine_framebuffer_request.response -> framebuffers[ 0 ] -> pitch >> 2, LIB_FONT_ALIGN_left );
+	const char welcome[] = "CoralOS starting...again\n";
+	terminal_print(&term, welcome, sizeof(welcome) - 1);
 
 	// infinite loop
 	for(;;);

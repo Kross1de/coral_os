@@ -13,8 +13,8 @@ CFLAGS="-O2 -march=x86-64 -mtune=generic -m64 -ffreestanding -nostdlib -nostartf
 LDFLAGS="-nostdlib -static -no-dynamic-linker"
 
 ${C} -c kernel/init.c -o build/init.o ${CFLAGS} || exit 1;
-
-${LD} build/init.o -o build/kernel -T tools/linker.kernel ${LDFLAGS}
+${C} -c kernel/terminal.c -o build/terminal.o ${CFLAGS} || exit 1;
+${LD} build/init.o build/terminal.o -o build/kernel -T tools/linker.kernel ${LDFLAGS}
 
 cp build/kernel tools/limine.cfg limine/limine-bios.sys limine/limine-bios-cd.bin limine/limine-uefi-cd.bin build/iso
 

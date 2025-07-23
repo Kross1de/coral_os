@@ -1,5 +1,6 @@
 /*===============================================================================
  Copyright (C) Andrzej Adamczyk (at https://blackdev.org/). All rights reserved.
+ Copyright (C) Kross1de. All rights reserved.
 ===============================================================================*/
 
 uint32_t lib_color_blend( uint32_t background, uint32_t foreground ) {
