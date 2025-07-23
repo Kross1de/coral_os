@@ -1,11 +1,12 @@
 /*===============================================================================
  Copyright (C) Andrzej Adamczyk (at https://blackdev.org/). All rights reserved.
+ Copyright (C) Kross1de. All right reserved.
 ===============================================================================*/
 
 #ifndef	LIB_FONT
 	#define	LIB_FONT
 
-        // display management
+	// display management
 	#define LIB_FONT_ALIGN_left             	0b00000001
 	#define LIB_FONT_ALIGN_center           	0b00000010
 	#define LIB_FONT_ALIGN_right            	0b00000100
