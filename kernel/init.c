@@ -3,25 +3,21 @@ Copyright (C) Kross1de. All rights reserved.
 ==============================================================================*/
 
 	//----------------------------------------------------------------------
-	// constants, structures, definitions
-	// static --------------------------------------------------------------
+	// includes
 	#include	"../library/color.h"
 	#include	"../library/color.c"
 	#include	"../library/font.h"
 	#include	"../library/font.c"
+	#include	"config.h"
 	#include	"terminal.h"
 	//----------------------------------------------------------------------
 
 // limine definitions
 #include	"../limine/limine.h"
 
-// limine requests
-static volatile struct limine_framebuffer_request limine_framebuffer_request = {
-	.id = LIMINE_FRAMEBUFFER_REQUEST,
-	.revision = 0
-};
+struct terminal term;
 
-// our mighty init
+// entry point
 void _entry( void ) {
 	// linear framebuffer is available (with 32 bits per pixel)?
 	if( limine_framebuffer_request.response == NULL || limine_framebuffer_request.response -> framebuffer_count != 1 || limine_framebuffer_request.response -> framebuffers[ 0 ] -> bpp != 32 )
@@ -35,12 +31,14 @@ void _entry( void ) {
 	uint32_t pitch = limine_framebuffer_request.response -> framebuffers[ 0 ] -> pitch;
 
 	// initialize terminal
-	struct terminal term;
 	terminal_init(&term, framebuffer, width, height, pitch);
 
 	// show welcome message
 	const char welcome[] = "Hello, World\n";
 	terminal_print(&term, welcome, sizeof(welcome) - 1);
+
+	// create binary memory map
+	init_memory();
 
 	// infinite loop
 	for(;;);
